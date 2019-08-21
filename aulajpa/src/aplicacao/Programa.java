@@ -30,6 +30,7 @@ public class Programa {
 		em.remove(p);
 		em.getTransaction().commit();*/
 		System.out.println(p);
+		System.out.println("FM, I'm in hell");
 		
 		em.close();
 		emf.close();
