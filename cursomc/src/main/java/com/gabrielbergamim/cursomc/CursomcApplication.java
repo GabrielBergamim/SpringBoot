@@ -11,12 +11,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.gabrielbergamim.cursomc.domain.Categoria;
 import com.gabrielbergamim.cursomc.domain.Produto;
 import com.gabrielbergamim.cursomc.repositoreis.CategoriaRepository;
+import com.gabrielbergamim.cursomc.repositoreis.ProdutoRepository;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	@Autowired
+	private ProdutoRepository produtoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -35,9 +38,12 @@ public class CursomcApplication implements CommandLineRunner{
 		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
 		cat2.getProdutos().add(p2);
 		
+		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat1));
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
 	}
 	
