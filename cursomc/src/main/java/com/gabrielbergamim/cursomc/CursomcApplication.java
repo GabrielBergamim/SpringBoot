@@ -14,6 +14,7 @@ import com.gabrielbergamim.cursomc.domain.Cidade;
 import com.gabrielbergamim.cursomc.domain.Cliente;
 import com.gabrielbergamim.cursomc.domain.Endereco;
 import com.gabrielbergamim.cursomc.domain.Estado;
+import com.gabrielbergamim.cursomc.domain.ItemPedido;
 import com.gabrielbergamim.cursomc.domain.Pagamento;
 import com.gabrielbergamim.cursomc.domain.PagamentoComBoleto;
 import com.gabrielbergamim.cursomc.domain.PagamentoComCartao;
@@ -26,6 +27,7 @@ import com.gabrielbergamim.cursomc.repositoreis.CidadeRepository;
 import com.gabrielbergamim.cursomc.repositoreis.ClienteRepository;
 import com.gabrielbergamim.cursomc.repositoreis.EnderecoRepository;
 import com.gabrielbergamim.cursomc.repositoreis.EstadoRepository;
+import com.gabrielbergamim.cursomc.repositoreis.ItemPedidoRepository;
 import com.gabrielbergamim.cursomc.repositoreis.PagamentoRepository;
 import com.gabrielbergamim.cursomc.repositoreis.PedidoRepository;
 import com.gabrielbergamim.cursomc.repositoreis.ProdutoRepository;
@@ -49,6 +51,8 @@ public class CursomcApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -102,6 +106,16 @@ public class CursomcApplication implements CommandLineRunner{
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 2000.00, 1);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 80.00, 2);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 800.00, 1);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
@@ -111,6 +125,7 @@ public class CursomcApplication implements CommandLineRunner{
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 		System.out.println("FM, I'm in hell!!");
 		
