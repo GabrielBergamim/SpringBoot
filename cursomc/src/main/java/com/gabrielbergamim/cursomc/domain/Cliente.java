@@ -20,7 +20,7 @@ import com.gabrielbergamim.cursomc.domain.enums.TipoCliente;
 @Entity
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -28,20 +28,20 @@ public class Cliente implements Serializable{
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
+
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
-	
+
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
-	
+
 	@OneToMany(mappedBy="cliente")
 	@JsonIgnore
 	private List<Pedido> pedidos = new ArrayList<>();
-	
+
 	public Cliente() {
-		
+
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
@@ -108,7 +108,7 @@ public class Cliente implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-	
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -141,5 +141,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

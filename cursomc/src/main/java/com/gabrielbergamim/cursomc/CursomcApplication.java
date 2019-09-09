@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.gabrielbergamim.cursomc.domain.Categoria;
 import com.gabrielbergamim.cursomc.domain.Cidade;
-import com.gabrielbergamim.cursomc.domain.Cliente;
 import com.gabrielbergamim.cursomc.domain.Endereco;
 import com.gabrielbergamim.cursomc.domain.Estado;
 import com.gabrielbergamim.cursomc.domain.ItemPedido;
