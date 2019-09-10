@@ -4,21 +4,12 @@ package com.gabrielbergamim.cursomc;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import com.gabrielbergamim.cursomc.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.gabrielbergamim.cursomc.domain.Categoria;
-import com.gabrielbergamim.cursomc.domain.Cidade;
-import com.gabrielbergamim.cursomc.domain.Endereco;
-import com.gabrielbergamim.cursomc.domain.Estado;
-import com.gabrielbergamim.cursomc.domain.ItemPedido;
-import com.gabrielbergamim.cursomc.domain.Pagamento;
-import com.gabrielbergamim.cursomc.domain.PagamentoComBoleto;
-import com.gabrielbergamim.cursomc.domain.PagamentoComCartao;
-import com.gabrielbergamim.cursomc.domain.Pedido;
-import com.gabrielbergamim.cursomc.domain.Produto;
 import com.gabrielbergamim.cursomc.domain.enums.EstadoPagamento;
 import com.gabrielbergamim.cursomc.domain.enums.TipoCliente;
 import com.gabrielbergamim.cursomc.repositoreis.CategoriaRepository;

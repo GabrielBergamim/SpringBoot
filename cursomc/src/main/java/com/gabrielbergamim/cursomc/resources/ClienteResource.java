@@ -1,17 +1,16 @@
 package com.gabrielbergamim.cursomc.resources;
 
-import com.gabrielbergamim.cursomc.domain.Categoria;
 import com.gabrielbergamim.cursomc.domain.Cliente;
-import com.gabrielbergamim.cursomc.dto.CategoriaDTO;
 import com.gabrielbergamim.cursomc.dto.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.gabrielbergamim.cursomc.services.ClienteService;
-
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/clientes")
@@ -45,6 +44,14 @@ public class ClienteResource {
 		service.delete(id);
 
 		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ClienteDTO>> findAll(){
+		List<Cliente> list = service.findAll();
+		List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDto);
 	}
 
 	@RequestMapping(value="/page",method=RequestMethod.GET)
