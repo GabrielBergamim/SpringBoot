@@ -1,12 +1,15 @@
 package com.gabrielbergamim.cursomc.config;
 
-import com.gabrielbergamim.cursomc.services.DbService;
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.text.ParseException;
+import com.gabrielbergamim.cursomc.services.DbService;
+import com.gabrielbergamim.cursomc.services.EmailService;
+import com.gabrielbergamim.cursomc.services.MockEmailService;
 
 @Configuration
 @Profile("test")
@@ -21,5 +24,10 @@ public class TestConfig  {
         dbService.instantiateDataBase();
 
         return true;
+    }
+    
+    @Bean
+    public EmailService emailService() {
+    	return new MockEmailService();
     }
 }
