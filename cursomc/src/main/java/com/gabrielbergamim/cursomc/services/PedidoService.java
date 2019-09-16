@@ -4,9 +4,13 @@ import java.util.Date;
 import java.util.Optional;
 
 import com.gabrielbergamim.cursomc.domain.Cliente;
+import com.gabrielbergamim.cursomc.security.UserSS;
+import com.gabrielbergamim.cursomc.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Sort.Direction;
 import com.gabrielbergamim.cursomc.domain.ItemPedido;
 import com.gabrielbergamim.cursomc.domain.PagamentoComBoleto;
 import com.gabrielbergamim.cursomc.domain.Pedido;
@@ -71,6 +75,16 @@ public class PedidoService {
 		//emailService.sendOrderConfirmationEmail(obj);
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
+	}
+
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente =  clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
 	}
 	
 }
